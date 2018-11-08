@@ -1,0 +1,13 @@
+@tailwind preflight;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+.bg-off-white {
+  background: #f4f8fb;
+}
