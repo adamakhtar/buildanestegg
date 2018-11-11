@@ -4,23 +4,23 @@
       <div class="_sidebar flex-none w-64 p-4 border border-grey-light rounded shadow bg-white">
         <p class="mb-6">
           <label class="font-semibold inline-block mb-1 text-base">How old are you?</label>
-          <input class="border border-grey-light p-2" type="text" v-model='currentAge'>
+          <input class="border border-grey-light p-2" type="text" v-model.number='currentAge'>
         </p>
         <p class="mb-6">
           <label class="font-semibold inline-block mb-1 text-base">What age do you want to retire?</label>
-          <input class="border border-grey-light p-2" type="text" v-model='retirementAge'>
+          <input class="border border-grey-light p-2" type="text" v-model.number='retirementAge'>
         </p>
         <p class="mb-6">
           <label class="font-semibold inline-block mb-1 text-base">How much can you save a month?</label>
-          <input class="border border-grey-light p-2" type="text" v-model='monthlyAddition'>
+          <input class="border border-grey-light p-2" type="text" v-model.number='monthlyAddition'>
         </p>
         <p class="mb-6">
           <label class="font-semibold inline-block mb-1 text-base">How much have you saved so far?</label>
-          <input class="border border-grey-light p-2" type="text" v-model='principal'>
+          <input class="border border-grey-light p-2" type="text" v-model.number='principal'>
         </p>
         <p class="mb-6">
           <label class="font-semibold inline-block mb-1 text-base">Annual Interest Rate</label>
-          <input class="border border-grey-light p-2" type="text" v-model='rate'>
+          <input class="border border-grey-light p-2" type="text" v-model.number='rate'>
         </p>
 
         <div class="mb-6">
@@ -79,7 +79,7 @@
           <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-6 w-1/2 mr-2 leading-normal">
             <h3 class="font-semibold text-4xl leading-tight">Invest via iDeco and ...</h3>
             <h5 class="text-8xl leading-none font-normal">{{idecoProtectedPercent}}%</h5>
-            <p>of your nest egg could be tax free (approx ¥{{Math.round(idecoProtectedTotal)}}).</p>
+            <p>of your nest egg could be tax free (approx ¥{{idecoProtectedTotal | currency}})</p>
             <p><a href="#">Learn more about iDeco</a></p>
           </div>
 
@@ -99,7 +99,7 @@
 
           <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 mx-2 leading-normal">
             <h3 class="font-semibold text-2xl mb-2 leading-tight">Skip work lunches</h3>
-            <p>and have ¥{{lunchSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithLunch)}}% to ¥{{preTaxTotalWithlunch | currency}}</p>
+            <p>and have ¥{{lunchSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithLunch)}}% to ¥{{preTaxTotalWithLunch | currency}}</p>
           </div>
 
           <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 ml-2 leading-normal">
@@ -129,22 +129,10 @@
 </template>
 
 <script>
+import { ciwa } from './calculators/ciwa'
 import LineChart from './components/LineChart.vue'
+import IdecoCalculator from './calculators/ideco'
 var _ = require('lodash');
-
-// compound interest with additions
-var ciwa = function(p, pmt, r, n, t) {
-// See https://www.thecalculatorsite.com/articles/finance/compound-interest-formula.php?page=2
-// p = the principal investment amount (the initial deposit or loan amount)
-// pmt = the monthly payment
-// r = the annual interest rate (decimal)
-// n = the number of compounds per period (months, years, etc)
-// t = the number of periods (months, years, etc) the money is invested or borrowed
-  var compoundInterestForPrincipal = p * Math.pow( (1+r/n), (n*t) );
-  var futureValueOfSeries = pmt * ( ( Math.pow( (1 + r/n), ( n*t ) ) - 1 ) / (r/n) ) * (1+r/n);
-  var total = compoundInterestForPrincipal + futureValueOfSeries;
-  return total;
-}
 
 var result = ciwa(1000, 100, 0.07, 12, 20)
 var result = console.log("Result", result)
@@ -194,12 +182,14 @@ export default {
         this.years
       )
     },
+    monthlyContributionWithCoffee () {
+      return this.monthlyAddition + this.coffeeSavingPerMonth;
+    },
     preTaxTotalWithCoffee () {
-      var combinedContribution = (this.monthlyAddition + this.coffeeSavingPerMonth)
-      console.log("combinedContribution", combinedContribution);
+      console.log("monthlyContributionWithCoffee", this.monthlyContributionWithCoffee)
       return ciwa(
         this.principal,
-        combinedContribution,
+        this.monthlyContributionWithCoffee,
         this.rate / 100,
         12,
         this.years
@@ -222,20 +212,24 @@ export default {
     preTaxGrowthWithLunch () {
       return (this.preTaxTotalWithLunch - this.preTaxTotal) / this.preTaxTotal * 100
     },
+    idecoCalculator () {
+      return new IdecoCalculator(this.currentAge, this.retirementAge, this.principal, this.monthlyAddition, this.rate, this.profession)
+    },
     idecoProtectedTotal () {
-      // to keep things simple the principal will *not* be invested via
-      // iDeco. It will be invested as a lump sum in the sidepot
-      if (this.availableIdecoYears == 0) {
-        return 0
-      }
+      return this.idecoCalculator.protectedTotal()
+      // // to keep things simple the principal will *not* be invested via
+      // // iDeco. It will be invested as a lump sum in the sidepot
+      // if (this.availableIdecoYears == 0) {
+      //   return 0
+      // }
 
-      return ciwa(
-        0,
-        this.idecoMonthlyContribution,
-        this.rate / 100,
-        12,
-        this.availableIdecoYears
-      )
+      // return ciwa(
+      //   0,
+      //   this.idecoMonthlyContribution,
+      //   this.rate / 100,
+      //   12,
+      //   this.availableIdecoYears
+      // )
     },
     preEligibleYears () {
       return (this.currentAge < this.idecoAgeMin ? this.idecoAgeMin - this.currentAge : 0);
@@ -244,26 +238,28 @@ export default {
       return (this.retirementAge > this.idecoAgeMax ? this.retirementAge - this.idecoAgeMax : 0);
     },
     availableIdecoYears () {
-      var startAge = this.idecoAgeMin;
-      var finishAge = null;
-      if ( this.currentAge > this.idecoAgeMin ) {
-        startAge = this.currentAge;
-      } else {
-        startAge = this.idecoAgeMin;
-      }
+      return this.idecoCalculator.eligibleYears()
+      // var startAge = this.idecoAgeMin;
+      // var finishAge = null;
+      // if ( this.currentAge > this.idecoAgeMin ) {
+      //   startAge = this.currentAge;
+      // } else {
+      //   startAge = this.idecoAgeMin;
+      // }
 
-      if ( this.retirementAge < this.idecoAgeMax ) {
-        finishAge = this.retirementAge;
-      } else {
-        finishAge = this.idecoAgeMax;
-      }
+      // if ( this.retirementAge < this.idecoAgeMax ) {
+      //   finishAge = this.retirementAge;
+      // } else {
+      //   finishAge = this.idecoAgeMax;
+      // }
 
-      return finishAge - startAge;
+      // return finishAge - startAge;
     },
     idecoProtectedPercent () {
-      return Math.round(this.idecoProtectedTotal / this.preTaxTotal * 100);
+      return this.idecoCalculator.protectedPercentage();
+      // return Math.round(this.idecoProtectedTotal / this.preTaxTotal * 100);
     },
-    idecoUnprotectedTotal () {
+    old_idecoUnprotectedTotal () {
       var sidepot = 0;
 
       // preelligible years we have to ordinarily invest all of our monthly contribution
@@ -299,7 +295,7 @@ export default {
 
       return sidepot;
     },
-    monthlyMaxIdecoContribution () {
+    old_monthlyMaxIdecoContribution () {
       switch(this.profession) {
         case 'employee':
         return 23000;
@@ -312,14 +308,16 @@ export default {
       }
     },
     idecoMonthlyContribution () {
-      if (this.monthlyAddition > this.monthlyMaxIdecoContribution) {
-        return this.monthlyMaxIdecoContribution;
-      } else {
-        return this.monthlyAddition;
-      }
+      return this.idecoCalculator.protectedMonthlyContribution();
+      // if (this.monthlyAddition > this.monthlyMaxIdecoContribution) {
+      //   return this.monthlyMaxIdecoContribution;
+      // } else {
+      //   return this.monthlyAddition;
+      // }
     },
     idecoExcessContribution () {
-      return (this.monthlyAddition >= this.monthlyMaxIdecoContribution ? this.monthlyAddition - this.monthlyMaxIdecoContribution : 0);
+      return this.idecoCalculator.excessMonthlyContribution();
+      // return (this.monthlyAddition >= this.monthlyMaxIdecoContribution ? this.monthlyAddition - this.monthlyMaxIdecoContribution : 0);
     },
     years () {
       return this.retirementAge - this.currentAge;

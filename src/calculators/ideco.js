@@ -1,3 +1,5 @@
+import { ciwa } from './ciwa'
+
 export default class IdecoCalculator {
   constructor(startAge, retirementAge, principal, monthlyContribution, interestRate, workStatus) {
     this.startAge = startAge;
@@ -11,19 +13,6 @@ export default class IdecoCalculator {
     this.maxAge = 60;
   }
 
-  // compound interest with additions
-  ciwa (p, pmt, r, n, t) {
-  // See https://www.thecalculatorsite.com/articles/finance/compound-interest-formula.php?page=2
-  // p = the principal investment amount (the initial deposit or loan amount)
-  // pmt = the monthly payment
-  // r = the annual interest rate (decimal)
-  // n = the number of compounds per period (months, years, etc)
-  // t = the number of periods (months, years, etc) the money is invested or borrowed
-    var compoundInterestForPrincipal = p * Math.pow( (1+r/n), (n*t) );
-    var futureValueOfSeries = pmt * ( ( Math.pow( (1 + r/n), ( n*t ) ) - 1 ) / (r/n) );
-    var total = compoundInterestForPrincipal + futureValueOfSeries;
-    return Math.round(total);
-  }
 
   // Returns the actual number eligible years someone has to invest in an
   // Ideco according to their personal start and end ages and the Ideco's
@@ -57,7 +46,7 @@ export default class IdecoCalculator {
   protectedTotal () {
     // to keep things simple the principal will *not* be invested via
     // iDeco. It will be invested as a lump sum in the sidepot
-    return this.ciwa(
+    return ciwa(
       0,
       this.protectedMonthlyContribution(),
       this.interestRate / 100,
@@ -71,7 +60,7 @@ export default class IdecoCalculator {
 
     // pre-eligible years we have to ordinarily invest all of our monthly contribution
     // we also invest our principal here.
-    return this.ciwa(
+    return ciwa(
       this.principal,
       this.monthlyContribution,
       this.interestRate / 100,
@@ -86,7 +75,7 @@ export default class IdecoCalculator {
     // If starting age was before the Ideco's minimum age then a sidepot was setup
     // for investing in that period. We use that pre-sidepot i.e. currentSidepot
     // as the principal here
-    return this.ciwa(
+    return ciwa(
       currentSidepot,
       this.excessMonthlyContribution(),
       this.interestRate / 100,
@@ -99,13 +88,17 @@ export default class IdecoCalculator {
     // for post eligible years we revert back to investing all of the monthly
     // allowance in. We also assume we cashout the entire ideco and mix it with
     // the existing sidepot and will be henceforth ordinarily invested
-    return this.ciwa(
+    return ciwa(
       currentSidepot,
       this.monthlyContribution,
       this.interestRate / 100,
       12,
       this.postEligibleYears()
     );
+  }
+
+  protectedPercentage () {
+    return Math.round(this.protectedTotal() / this.total() * 100)
   }
 
   preEligibleYears () {

@@ -356,6 +356,28 @@ describe('IdecoCalculator', () => {
     expect(calc.postSidepotTotal(existingSidepot)).toEqual(expectedPreSidepot)
   });
 
+  it('protectedPercentage() returns the protectedTotal as a percentage of the Total value', () => {
+    // correctly calculates investing up to end of post stage
+    // pre stage 0 (not investing in these years)
+    // during sidepot stage - 10682141 (principal 0 and excess contrib of 7000 @5% 40 years )
+    // during ideco stage - 35098464 (0 principal 23K monthly contrib @5% 40 years)
+    // combined during stage = 10682141 + 35098464 = 45780605
+    // post sidepot = 80059560 (45780605¥ principal, 30000¥pm, @5%, 10yrs)
+    var calc = new IdecoCalculator(20,
+      70,
+      0,
+      30000,
+      5,
+      'employee'
+    )
+    var total = calc.total()
+    var protectedTotal = calc.protectedTotal()
+    var expectedPercentage = Math.round(35098464/80059560*100)
+    expect(total).toEqual(80059560)
+    expect(protectedTotal).toEqual(35098464)
+    expect(calc.protectedPercentage()).toEqual(expectedPercentage)
+  })
+
   it('eligibleYears() returns correct number of years', () => {
     var calc = new IdecoCalculator(20,
       60,
