@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container mx-auto mt-16">
+  <div id="app-container" class="container mx-auto mt-16">
     <div class="flex px-4">
       <div class="_sidebar flex-none w-64 p-4 border border-grey-light rounded shadow bg-white">
         <p class="mb-6">
@@ -112,13 +112,90 @@
 
         <div class="border border-grey-light rounded mb-4 shadow bg-white">
           <div class="_header border-t-4 border-blue-dark rounded-t"></div>
-          <div class="_body p-4">
-            <h3 class="text-black font-medium text-xl text-center mb-4">How to protect yourself from tax</h3>
+          <div class="_body p-4  leading-normal">
+            <h3 class="text-black font-medium text-xl text-center mb-4">Ways to pay less tax</h3>
             <div class="_alert p-4 mb-4 bg-blue-lightest text-blue-darker flex items-center">
               <i class="fas fa-piggy-bank text-3xl text-blue-darkest opacity-25 mr-4"></i>
-              <p class="max-w-lg leading-normal">
+              <p class="max-w-lg">
                 You can reduce the amount of tax you would have to pay on your investment of ¥{{preTaxTotal | currency}} by investing through a government backed tax relief scheme such as the iDeco or NISA.
               </p>
+            </div>
+            <h4 class="text-lg mt-4 mb-0">iDeco</h4>
+            <p class="mb-4">Explain briefly the key points here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+            <ul>
+              <li>Can invest when you are 20-60 years old</li>
+              <li>Must be enrolled into the national pension system</li>
+              <li>Can not withdraw any saved money until you are 60</li>
+              <li>Lorem, ipsum dolor sit amet consectetur</li>
+            </ul>
+
+            <h4 class="text-lg mt-4 mb-0">Nisa</h4>
+            <p class="mb-4">Explain briefly the key points here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+            <ul>
+              <li>Lorem, ipsum dolor sit amet consectetur</li>
+              <li>Lorem, ipsum dolor sit amet consectetur</li>
+              <li>Lorem, ipsum dolor sit amet consectetur</li>
+              <li>Lorem, ipsum dolor sit amet consectetur</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border border-grey-light rounded mb-4 shadow bg-white">
+          <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+          <div class="_body p-4  leading-normal">
+            <h3 class="text-black font-medium text-xl text-center mb-4">Learn more</h3>
+            <h4 class="text-lg mt-4 mb-2">Retire Japan</h4>
+            <div class="flex">
+              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
+              <div class="ml-2">
+                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+                <a href="http://www.retirejapan.info/" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">Visit</a>
+              </div>
+            </div>
+
+
+            <h4 class="text-lg mt-4 mb-2">一番やさしい! 一番くわしい! 個人型確定拠出年金iDeCo(イデコ)活用入門</h4>
+            <div class="flex">
+              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
+              <div class="ml-2">
+                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+                <a href="https://www.amazon.co.jp/gp/product/4478100578/" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
+              </div>
+            </div>
+
+            <h4 class="text-lg mt-4 mb-2">The RetireJapan Guide to iDeCo</h4>
+            <div class="flex">
+              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
+              <div class="ml-2">
+                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+                <a href="https://gumroad.com/l/rSGsF" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
+              </div>
+            </div>
+
+            <h4 class="text-lg mt-4 mb-2">最新版! 税金がタダになる、おトクな「NISA」活用入門</h4>
+            <div class="flex">
+              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
+              <div class="ml-2">
+                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+                <a href="https://www.amazon.co.jp/gp/product/4478029652" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
+              </div>
+            </div>
+
+            <h4 class="text-lg mt-4 mb-2">The RetireJapan Guide to Nisa</h4>
+            <div class="flex">
+              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
+              <div class="ml-2">
+                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+                <a href="https://gumroad.com/l/sLEXJ" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
+              </div>
+
             </div>
           </div>
         </div>

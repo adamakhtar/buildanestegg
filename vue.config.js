@@ -1,7 +1,7 @@
 module.exports = {
   pluginOptions: {
     s3Deploy: {
-      awsProfile: 'default',
+      awsProfile: 'buildanestegg',
       region: 'ap-northeast-1',
       bucket: 'buildanestegg',
       createBucket: false,
