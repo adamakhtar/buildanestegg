@@ -1,7 +1,7 @@
 <template>
   <div id="app-container" class="container mx-auto mt-16">
     <div class="flex px-4">
-      <div class="_sidebar flex-none w-64 p-4 border border-grey-light rounded shadow bg-white">
+      <div class="_sidebar flex-none w-80 p-4 border border-grey-light rounded shadow bg-white">
         <p class="mb-6">
           <label class="font-semibold inline-block mb-1 text-base">How old are you?</label>
           <input class="border border-grey-light p-2" type="text" v-model.number='currentAge'>
@@ -19,28 +19,9 @@
           <input class="border border-grey-light p-2" type="text" v-model.number='principal'>
         </p>
         <p class="mb-6">
-          <label class="font-semibold inline-block mb-1 text-base">Annual Interest Rate</label>
+          <label class="font-semibold inline-block mb-1 text-base">What do you think the average rate of return will be?</label>
           <input class="border border-grey-light p-2" type="text" v-model.number='rate'>
         </p>
-
-        <div class="mb-6">
-          <div class="mb-2">
-            <input type="radio" id="one" value="employee" v-model="profession" name="profession">
-            <label class="ml-2" for="one">Employee</label>
-          </div>
-          <div class="mb-2">
-            <input type="radio" id="two" value="selfemployed" v-model="profession" name="profession">
-            <label class="ml-2" for="two">Self-employed or un-employed</label>
-          </div>
-          <div class="mb-2">
-            <input type="radio" id="three" value="publicservant" v-model="profession" name="profession">
-            <label class="ml-2" for="three">Public servant</label>
-          </div>
-          <div class="mb-2">
-            <input type="radio" id="four" value="dependant" v-model="profession" name="profession">
-            <label class="ml-2" for="four">dependant</label>
-          </div>
-        </div>
       </div>
       <div class="_main flex-grow ml-8">
 
@@ -51,11 +32,9 @@
           <div class="_body p-4">
             <h3 class="text-black font-medium text-xl text-center mb-4">Your Estimated Return</h3>
             <p class="mb-4 font-semibold font-sans text-6xl text-center">¥{{preTaxTotal | currency}}</p>
-            <p class="leading-normal text-lg max-w-lg mx-auto text-center">
-              This is how much your investments are estimated to grow over {{years}} years at a constant rate of {{rate}}%.
+            <p class="leading-normal text-lg max-w-lg mx-auto text-left">
+              This is how much your nest egg is estimated to be worth before tax is deducted after {{years}} years. It assumes you'll invest ¥{{principal}} from the start and supplement it with ¥{{monthlyAddition}} monthly additions in something which grows at an average of {{rate}}% per year.
             </p>
-            <p class="leading-normal text-lg max-w-lg mx-auto text-center">
-              <strong>Note</strong> this figure is before tax. How much tax you will need to pay depends on your invidual circumstances however, 20% is a good rough estimate. There are government backed schemes which allow you to pay much less tax. See below for more details.</p>
           </div>
         </div>
 
@@ -76,22 +55,6 @@
         </div>
 
         <div class="flex">
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-6 w-1/2 mr-2 leading-normal">
-            <h3 class="font-semibold text-4xl leading-tight">Invest via iDeco and ...</h3>
-            <h5 class="text-8xl leading-none font-normal">{{idecoProtectedPercent}}%</h5>
-            <p>of your nest egg could be tax free (approx ¥{{idecoProtectedTotal | currency}})</p>
-            <p><a href="#">Learn more about iDeco</a></p>
-          </div>
-
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-6 w-1/2 ml-2 leading-normal">
-            <h3 class="font-semibold text-4xl leading-tight">Invest via NISA and ...</h3>
-            <h5 class="text-8xl leading-none font-normal">15%</h5>
-            <p>of your nest egg could be tax free (approx ¥{{Math.round(idecoProtectedTotal)}}).</p>
-            <p><a href="#">Learn more about NISA</a></p>
-          </div>
-        </div>
-
-        <div class="flex">
           <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 mr-2 leading-normal">
             <h3 class="font-semibold text-2xl mb-2 leading-tight">Ditch the coffee</h3>
             <p>and have ¥{{coffeeSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxTotalWithCoffee / preTaxTotal)}}% to ¥{{preTaxTotalWithCoffee | currency}}</p>
@@ -105,98 +68,6 @@
           <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 ml-2 leading-normal">
             <h3 class="font-semibold text-2xl mb-2 leading-tight">Stay in a night</h3>
             <p>and have ¥25000 more per month to invest. Your total investment grows by 10% to ¥{{preTaxTotal | currency}}</p>
-          </div>
-        </div>
-
-
-
-        <div class="border border-grey-light rounded mb-4 shadow bg-white">
-          <div class="_header border-t-4 border-blue-dark rounded-t"></div>
-          <div class="_body p-4  leading-normal">
-            <h3 class="text-black font-medium text-xl text-center mb-4">Ways to pay less tax</h3>
-            <div class="_alert p-4 mb-4 bg-blue-lightest text-blue-darker flex items-center">
-              <i class="fas fa-piggy-bank text-3xl text-blue-darkest opacity-25 mr-4"></i>
-              <p class="max-w-lg">
-                You can reduce the amount of tax you would have to pay on your investment of ¥{{preTaxTotal | currency}} by investing through a government backed tax relief scheme such as the iDeco or NISA.
-              </p>
-            </div>
-            <h4 class="text-lg mt-4 mb-0">iDeco</h4>
-            <p class="mb-4">Explain briefly the key points here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-            <ul>
-              <li>Can invest when you are 20-60 years old</li>
-              <li>Must be enrolled into the national pension system</li>
-              <li>Can not withdraw any saved money until you are 60</li>
-              <li>Lorem, ipsum dolor sit amet consectetur</li>
-            </ul>
-
-            <h4 class="text-lg mt-4 mb-0">Nisa</h4>
-            <p class="mb-4">Explain briefly the key points here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-
-            <ul>
-              <li>Lorem, ipsum dolor sit amet consectetur</li>
-              <li>Lorem, ipsum dolor sit amet consectetur</li>
-              <li>Lorem, ipsum dolor sit amet consectetur</li>
-              <li>Lorem, ipsum dolor sit amet consectetur</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="border border-grey-light rounded mb-4 shadow bg-white">
-          <div class="_header border-t-4 border-blue-dark rounded-t"></div>
-          <div class="_body p-4  leading-normal">
-            <h3 class="text-black font-medium text-xl text-center mb-4">Learn more</h3>
-            <h4 class="text-lg mt-4 mb-2">Retire Japan</h4>
-            <div class="flex">
-              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
-              <div class="ml-2">
-                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-                <a href="http://www.retirejapan.info/" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">Visit</a>
-              </div>
-            </div>
-
-
-            <h4 class="text-lg mt-4 mb-2">一番やさしい! 一番くわしい! 個人型確定拠出年金iDeCo(イデコ)活用入門</h4>
-            <div class="flex">
-              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
-              <div class="ml-2">
-                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-                <a href="https://www.amazon.co.jp/gp/product/4478100578/" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
-              </div>
-            </div>
-
-            <h4 class="text-lg mt-4 mb-2">The RetireJapan Guide to iDeCo</h4>
-            <div class="flex">
-              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
-              <div class="ml-2">
-                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-                <a href="https://gumroad.com/l/rSGsF" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
-              </div>
-            </div>
-
-            <h4 class="text-lg mt-4 mb-2">最新版! 税金がタダになる、おトクな「NISA」活用入門</h4>
-            <div class="flex">
-              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
-              <div class="ml-2">
-                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-                <a href="https://www.amazon.co.jp/gp/product/4478029652" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
-              </div>
-            </div>
-
-            <h4 class="text-lg mt-4 mb-2">The RetireJapan Guide to Nisa</h4>
-            <div class="flex">
-              <div class="h-48 w-64 bg-grey-lightest border border-grey-light"></div>
-              <div class="ml-2">
-                <p class="mb-4">Small introduction goes here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-                <a href="https://gumroad.com/l/sLEXJ" class="leading-normal text-blue-dark hover:text-blue-dark my-2 py-1 px-4 border border-blue rounded-full no-underline hover:no-underline">View</a>
-              </div>
-
-            </div>
           </div>
         </div>
 
@@ -262,8 +133,21 @@ export default {
     monthlyContributionWithCoffee () {
       return this.monthlyAddition + this.coffeeSavingPerMonth;
     },
+    monthlyContributionWithLunch () {
+      return this.monthlyAddition + this.lunchSavingPerMonth;
+    },
+
+    preTaxGrowthWithCoffee () {
+      return (this.preTaxTotalWithCoffee - this.preTaxTotal) / this.preTaxTotal * 100
+    },
+
+    preTaxGrowthWithLunch () {
+      console.log("preTaxGrowthWithLunch - pretaxtotal", this.preTaxTotal)
+      console.log("preTaxGrowthWithLunch - this.preTaxTotalWithCoffee", this.preTaxTotalWithLunch)
+      return (this.preTaxTotalWithLunch - this.preTaxTotal) / this.preTaxTotal * 100
+    },
+
     preTaxTotalWithCoffee () {
-      console.log("monthlyContributionWithCoffee", this.monthlyContributionWithCoffee)
       return ciwa(
         this.principal,
         this.monthlyContributionWithCoffee,
@@ -272,23 +156,18 @@ export default {
         this.years
       )
     },
-    preTaxGrowthWithCoffee () {
-      return (this.preTaxTotalWithCoffee - this.preTaxTotal) / this.preTaxTotal * 100
-    },
+
     preTaxTotalWithLunch () {
-      var combinedContribution = (this.monthlyAddition + this.lunchSavingPerMonth)
-      console.log("combinedContribution", combinedContribution);
       return ciwa(
         this.principal,
-        combinedContribution,
+        this.monthlyContributionWithLunch,
         this.rate / 100,
         12,
         this.years
       )
     },
-    preTaxGrowthWithLunch () {
-      return (this.preTaxTotalWithLunch - this.preTaxTotal) / this.preTaxTotal * 100
-    },
+
+
     idecoCalculator () {
       return new IdecoCalculator(this.currentAge, this.retirementAge, this.principal, this.monthlyAddition, this.rate, this.profession)
     },

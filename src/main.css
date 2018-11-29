@@ -11,3 +11,29 @@ body {
 .bg-off-white {
   background: #f4f8fb;
 }
+
+.prose {
+  line-height: 1.5;
+}
+
+.prose h1 {
+  line-height: 1;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prose h2 {
+  line-height: 1;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prose h3 {
+  line-height: 1;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
