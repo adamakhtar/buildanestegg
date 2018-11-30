@@ -1,29 +1,41 @@
 <template>
-  <div id="app-container" class="container mx-auto mt-16">
-    <div class="flex px-4">
-      <div class="_sidebar flex-none w-80 p-4 border border-grey-light rounded shadow bg-white">
+  <div id="app-container" class="container mx-auto mt-16 px-4">
+    <div class="lg:flex">
+      <div class="_sidebar lg:flex-none w-full mb-4 lg:w-80 lg:mb-0 p-4 border border-grey-light rounded shadow bg-white">
         <p class="mb-6">
-          <label class="font-semibold inline-block mb-1 text-base">How old are you?</label>
-          <input class="border border-grey-light p-2" type="text" v-model.number='currentAge'>
+          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">How old are you?</label>
+          </br>
+          <input class="border border-grey-light p-3 h-12 rounded w-full text-3xl" type="text" v-model.number='currentAge'>
         </p>
         <p class="mb-6">
-          <label class="font-semibold inline-block mb-1 text-base">What age do you want to retire?</label>
-          <input class="border border-grey-light p-2" type="text" v-model.number='retirementAge'>
+          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">What age do you want to retire?</label>
+          </br>
+          <input class="border border-grey-light p-3 h-12 rounded w-full text-3xl" type="text" v-model.number='retirementAge'>
         </p>
         <p class="mb-6">
-          <label class="font-semibold inline-block mb-1 text-base">How much can you save a month?</label>
-          <input class="border border-grey-light p-2" type="text" v-model.number='monthlyAddition'>
+          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">How much can you save a month?</label>
+          </br>
+          <input class="border border-grey-light p-3 h-12 rounded w-full text-3xl" type="text" v-model.number='monthlyAddition'>
         </p>
         <p class="mb-6">
-          <label class="font-semibold inline-block mb-1 text-base">How much have you saved so far?</label>
-          <input class="border border-grey-light p-2" type="text" v-model.number='principal'>
+          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">How much have you saved so far?</label>
+          </br>
+          <input class="border border-grey-light p-3 h-12 rounded w-full text-3xl" type="text" v-model.number='principal'>
         </p>
-        <p class="mb-6">
-          <label class="font-semibold inline-block mb-1 text-base">What do you think the average rate of return will be?</label>
-          <input class="border border-grey-light p-2" type="text" v-model.number='rate'>
-        </p>
+        <div class="mb-6 w-full">
+          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">What do you think the average anual interest rate will be?</label>
+          <div class="relative">
+            <input class="border border-grey-light pl-3 pr-10 py-3 h-12 rounded w-full text-3xl" type="text" v-model.number='rate'>
+            <span class="absolute pin-r pin-b pr-3 leading-none text-3xl font-semibold text-grey-dark" style="padding-bottom: 0.55rem;">%</span>
+          </div>
+
+
+          <span class="text-sm text-grey-dark">
+            The American S&P 500 stock index returned on average 7% between 1950 and 2010. Remember past performance is no indication of future results.
+            <a class="text-grey-dark hover:text-grey-dark" href="https://www.thesimpledollar.com/where-does-7-come-from-when-it-comes-to-long-term-stock-returns/">Read more here</a></span>
+        </div>
       </div>
-      <div class="_main flex-grow ml-8">
+      <div class="_main lg:flex-grow lg:ml-8">
 
 
 
@@ -31,7 +43,7 @@
           <div class="_header border-t-4 border-blue-dark rounded-t"></div>
           <div class="_body p-4">
             <h3 class="text-black font-medium text-xl text-center mb-4">Your Estimated Return</h3>
-            <p class="mb-4 font-semibold font-sans text-6xl text-center">¥{{preTaxTotal | currency}}</p>
+            <p class="mb-4 font-semibold font-sans text-2xl sm:text-4xl md:text-6xl lg:text-6xl text-center">¥{{preTaxTotal | currency}}</p>
             <p class="leading-normal text-lg max-w-lg mx-auto text-left">
               This is how much your nest egg is estimated to be worth before tax is deducted after {{years}} years. It assumes you'll invest ¥{{principal}} from the start and supplement it with ¥{{monthlyAddition}} monthly additions in something which grows at an average of {{rate}}% per year.
             </p>
@@ -41,8 +53,8 @@
         <div class="border border-grey-light rounded shadow bg-white mb-4">
           <div class="_header border-t-4 border-blue-dark rounded-t"></div>
           <h3 class="text-black font-medium text-xl text-center my-4">Time Is Your Best Friend</h3>
-          <div class="_alert p-4 mb-4 mx-4 bg-blue-lightest text-blue-darker flex items-center">
-              <i class="fas fa-piggy-bank text-3xl text-blue-darkest opacity-25 mr-4"></i>
+          <div class="_alert p-4 mb-4 mx-4 bg-blue-lightest text-blue-darker flex flex-col items-center lg:flex-row lg:items-center">
+              <i class="fas fa-piggy-bank text-3xl text-blue-darkest opacity-25 mr-4 mb-3"></i>
               <p class="max-w-lg leading-normal">
                 Compound interest creates a snowball like effect with your investments; the gains you make in one year from interest are then subject to interest in the following year. The biggest multiplier is time. It's better to start earlier with smaller monthly contributions than to start later with bigger ones.
               </p>
@@ -54,20 +66,29 @@
           </div>
         </div>
 
-        <div class="flex">
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 mr-2 leading-normal">
-            <h3 class="font-semibold text-2xl mb-2 leading-tight">Ditch the coffee</h3>
-            <p>and have ¥{{coffeeSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxTotalWithCoffee / preTaxTotal)}}% to ¥{{preTaxTotalWithCoffee | currency}}</p>
+        <div class="flex flex-col lg:flex-row">
+          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white lg:w-1/3 mr-2 leading-normal">
+            <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+            <div class="p-4">
+              <h3 class="font-semibold text-2xl mb-2 leading-tight">Ditch the coffee</h3>
+              <p>and have ¥{{coffeeSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithCoffee)}}% to ¥{{preTaxTotalWithCoffee | currency}}</p>
+            </div>
           </div>
 
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 mx-2 leading-normal">
-            <h3 class="font-semibold text-2xl mb-2 leading-tight">Skip work lunches</h3>
-            <p>and have ¥{{lunchSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithLunch)}}% to ¥{{preTaxTotalWithLunch | currency}}</p>
+          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white lg:w-1/3 mx-2 leading-normal">
+            <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+            <div class="p-4">
+              <h3 class="font-semibold text-2xl mb-2 leading-tight">Skip work lunches</h3>
+              <p>and have ¥{{lunchSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithLunch)}}% to ¥{{preTaxTotalWithLunch | currency}}</p>
+            </div>
           </div>
 
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white p-4 w-1/3 ml-2 leading-normal">
-            <h3 class="font-semibold text-2xl mb-2 leading-tight">Stay in a night</h3>
-            <p>and have ¥25000 more per month to invest. Your total investment grows by 10% to ¥{{preTaxTotal | currency}}</p>
+          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white lg:w-1/3 ml-2 leading-normal">
+            <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+            <div class="p-4">
+              <h3 class="font-semibold text-2xl mb-2 leading-tight">Skip a night out</h3>
+              <p>and have ¥{{nightOutSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithNightOut)}}% to ¥{{preTaxTotalWithNightOut | currency}}</p>
+            </div>
           </div>
         </div>
 
@@ -93,16 +114,17 @@ export default {
   data () {
     return {
       datacollection: null,
-      currentAge: 10,
-      retirementAge: 70,
-      rate: 5,
-      monthlyAddition: 10000,
+      currentAge: 21,
+      retirementAge: 67,
+      rate: 7,
+      monthlyAddition: 25000,
       principal: 0,
       profession: "employee",
       idecoAgeMin: 20,
       idecoAgeMax: 60,
       coffeeSavingPerMonth: 8000,
-      lunchSavingPerMonth: 16000
+      lunchSavingPerMonth: 16000,
+      nightOutSavingPerMonth: 20000,
     }
   },
   mounted () {
@@ -111,7 +133,7 @@ export default {
     // a computed getter
     data () {
       return {
-        labels: _.range(this.currentAge, (this.currentAge + this.years)),
+        labels: _.range(this.currentAge, (this.currentAge + this.years + 1)),
         datasets: [
           {
             label: 'Investment Growth',
@@ -136,15 +158,32 @@ export default {
     monthlyContributionWithLunch () {
       return this.monthlyAddition + this.lunchSavingPerMonth;
     },
+    monthlyContributionWithNightOut () {
+      return this.monthlyAddition + this.nightOutSavingPerMonth;
+    },
+
+    differenceWithCoffee () {
+      return this.preTaxTotalWithCoffee - this.preTaxTotal;
+    },
+
+    differenceWithLunch () {
+      return this.preTaxTotalWithLunch - this.preTaxTotal;
+    },
+
+    differenceWithNightOut () {
+      return this.preTaxTotalWithNightOut - this.preTaxTotal;
+    },
 
     preTaxGrowthWithCoffee () {
       return (this.preTaxTotalWithCoffee - this.preTaxTotal) / this.preTaxTotal * 100
     },
 
     preTaxGrowthWithLunch () {
-      console.log("preTaxGrowthWithLunch - pretaxtotal", this.preTaxTotal)
-      console.log("preTaxGrowthWithLunch - this.preTaxTotalWithCoffee", this.preTaxTotalWithLunch)
       return (this.preTaxTotalWithLunch - this.preTaxTotal) / this.preTaxTotal * 100
+    },
+
+    preTaxGrowthWithNightOut () {
+      return (this.preTaxTotalWithNightOut - this.preTaxTotal) / this.preTaxTotal * 100
     },
 
     preTaxTotalWithCoffee () {
@@ -161,6 +200,16 @@ export default {
       return ciwa(
         this.principal,
         this.monthlyContributionWithLunch,
+        this.rate / 100,
+        12,
+        this.years
+      )
+    },
+
+    preTaxTotalWithNightOut () {
+      return ciwa(
+        this.principal,
+        this.monthlyContributionWithNightOut,
         this.rate / 100,
         12,
         this.years
@@ -195,85 +244,15 @@ export default {
     },
     availableIdecoYears () {
       return this.idecoCalculator.eligibleYears()
-      // var startAge = this.idecoAgeMin;
-      // var finishAge = null;
-      // if ( this.currentAge > this.idecoAgeMin ) {
-      //   startAge = this.currentAge;
-      // } else {
-      //   startAge = this.idecoAgeMin;
-      // }
-
-      // if ( this.retirementAge < this.idecoAgeMax ) {
-      //   finishAge = this.retirementAge;
-      // } else {
-      //   finishAge = this.idecoAgeMax;
-      // }
-
-      // return finishAge - startAge;
     },
     idecoProtectedPercent () {
       return this.idecoCalculator.protectedPercentage();
-      // return Math.round(this.idecoProtectedTotal / this.preTaxTotal * 100);
-    },
-    old_idecoUnprotectedTotal () {
-      var sidepot = 0;
-
-      // preelligible years we have to ordinarily invest all of our monthly contribution
-      // we also invest our principal here.
-      sidepot = ciwa(
-        this.principal,
-        this.monthlyAddition,
-        this.rate / 100,
-        12,
-        this.preEligibleYears
-      );
-
-      // during ideco years we invest our monnthly addition upto the full ideco allowance
-      // if there is money left over then we ordinarily invest the excess in a sidepot
-      sidepot = ciwa(
-        sidepot,
-        this.idecoExcessContribution,
-        this.rate / 100,
-        12,
-        this.idecoAgeMax - this.idecoAgeMin
-      );
-
-      // for post elligible years we revert back to investing all of the monthly
-      // allowance in. We also assume we cashout the entire ideco and will then
-      // be ordinarily invested in this sidepot
-      sidepot = ciwa(
-        sidepot + this.idecoProtectedTotal,
-        this.monthlyAddition,
-        this.rate / 100,
-        12,
-        this.postEligibleYears
-      );
-
-      return sidepot;
-    },
-    old_monthlyMaxIdecoContribution () {
-      switch(this.profession) {
-        case 'employee':
-        return 23000;
-        case 'selfemployed':
-        return 68000;
-        case 'publicservant':
-        return 12000;
-        case 'dependant':
-        return 23000;
-      }
     },
     idecoMonthlyContribution () {
       return this.idecoCalculator.protectedMonthlyContribution();
-      // if (this.monthlyAddition > this.monthlyMaxIdecoContribution) {
-      //   return this.monthlyMaxIdecoContribution;
-      // } else {
-      //   return this.monthlyAddition;
-      // }
     },
     idecoExcessContribution () {
       return this.idecoCalculator.excessMonthlyContribution();
-      // return (this.monthlyAddition >= this.monthlyMaxIdecoContribution ? this.monthlyAddition - this.monthlyMaxIdecoContribution : 0);
     },
     years () {
       return this.retirementAge - this.currentAge;
@@ -282,7 +261,7 @@ export default {
   methods: {
     calculateYearlyGains () {
       var yearlyGains = [];
-      for(var i=0; i < this.years; i++){
+      for(var i=0; i <= this.years; i++){
         yearlyGains.push(ciwa(this.principal, this.monthlyAddition, this.rate / 100, 12, i))
       }
       return yearlyGains;
