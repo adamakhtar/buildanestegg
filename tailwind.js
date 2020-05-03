@@ -198,6 +198,8 @@ module.exports = {
       "sans-serif"
     ],
     'sans': [
+      'sofia-pro',
+      'filson-pro',
       'Source Sans Pro',
       'system-ui',
       'BlinkMacSystemFont',
@@ -213,6 +215,8 @@ module.exports = {
       'sans-serif',
     ],
     'serif': [
+      'poynter-oldstyle-display',
+      'p22-mackinac-pro',
       'Constantia',
       'Lucida Bright',
       'Lucidabright',

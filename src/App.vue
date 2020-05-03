@@ -1,5 +1,5 @@
 <template>
-  <div id="app-container" class="container mx-auto mt-16 px-4">
+  <div id="app-container" class="container mx-auto px-4 font-light">
     <div class="lg:flex">
       <div class="_sidebar lg:flex-none w-full mb-4 lg:w-80 lg:mb-0 p-4 border border-grey-light rounded shadow bg-white">
         <p class="mb-6">
@@ -23,7 +23,7 @@
           <input class="border border-grey-light p-3 h-12 rounded w-full text-3xl" type="text" v-model.number='principal'>
         </p>
         <div class="mb-6 w-full">
-          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">What do you think the average anual interest rate will be?</label>
+          <label class="font-semibold inline-block mb-1 text-base text-grey-darker">What do you think the average annual interest rate will be?</label>
           <div class="relative">
             <input class="border border-grey-light pl-3 pr-10 py-3 h-12 rounded w-full text-3xl" type="text" v-model.number='rate'>
             <span class="absolute pin-r pin-b pr-3 leading-none text-3xl font-semibold text-grey-dark" style="padding-bottom: 0.55rem;">%</span>
@@ -40,10 +40,10 @@
 
 
         <div class="border border-grey-light rounded mb-4 shadow bg-white">
-          <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+          <div class="_header rounded-t"></div>
           <div class="_body p-4">
-            <h3 class="text-black font-medium text-xl text-center mb-4">Your Estimated Return</h3>
-            <p class="mb-4 font-semibold font-sans text-2xl sm:text-4xl md:text-6xl lg:text-6xl text-center">¥{{preTaxTotal | currency}}</p>
+            <h3 class="font-black font-medium text-xl text-center leading-none mb-1">Your Estimated Return</h3>
+            <p class="mb-5 font-semibold font-sans text-2xl sm:text-4xl md:text-6xl lg:text-6xl text-center">¥{{preTaxTotal | currency}}</p>
             <p class="leading-normal text-lg max-w-lg mx-auto text-left">
               This is how much your nest egg is estimated to be worth before tax is deducted after {{years}} years. It assumes you'll invest ¥{{principal}} from the start and supplement it with ¥{{monthlyAddition}} monthly additions in something which grows at an average of {{rate}}% per year.
             </p>
@@ -51,9 +51,9 @@
         </div>
 
         <div class="border border-grey-light rounded shadow bg-white mb-4">
-          <div class="_header border-t-4 border-blue-dark rounded-t"></div>
-          <h3 class="text-black font-medium text-xl text-center my-4">Time Is Your Best Friend</h3>
-          <div class="_alert p-4 mb-4 mx-4 bg-blue-lightest text-blue-darker flex flex-col items-center lg:flex-row lg:items-center">
+          <div class="_header rounded-t"></div>
+          <h3 class="font-black font-medium text-xl text-center leading-none mt-4 mb-5">Time Is Your Best Friend</h3>
+          <div class="alert p-4 mb-4 mx-4 rounded-lg flex flex-col items-center lg:flex-row lg:items-center">
               <i class="fas fa-piggy-bank text-3xl text-blue-darkest opacity-25 mr-4 mb-3"></i>
               <p class="max-w-lg leading-normal">
                 Compound interest creates a snowball like effect with your investments; the gains you make in one year from interest are then subject to interest in the following year. The biggest multiplier is time. It's better to start earlier with smaller monthly contributions than to start later with bigger ones.
@@ -67,26 +67,26 @@
         </div>
 
         <div class="flex flex-col lg:flex-row">
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white lg:w-1/3 mr-2 leading-normal">
-            <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+          <div class="text-center border border-grey-light rounded mb-4 lg:mb-0 shadow bg-white lg:w-1/3 lg:mr-2 leading-normal">
+            <div class="_header rounded-t"></div>
             <div class="p-4">
-              <h3 class="font-semibold text-2xl mb-2 leading-tight">Ditch the coffee</h3>
+              <h3 class="font-black text-lg mb-2 leading-tight">Ditch the coffee</h3>
               <p>and have ¥{{coffeeSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithCoffee)}}% to ¥{{preTaxTotalWithCoffee | currency}}</p>
             </div>
           </div>
 
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white lg:w-1/3 mx-2 leading-normal">
-            <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+          <div class="text-center border border-grey-light rounded mb-4 lg:mb-0 shadow bg-white lg:w-1/3 lg:mx-2 leading-normal">
+            <div class="_header rounded-t"></div>
             <div class="p-4">
-              <h3 class="font-semibold text-2xl mb-2 leading-tight">Skip work lunches</h3>
+              <h3 class="font-black text-lg mb-2 leading-tight">Skip work lunches</h3>
               <p>and have ¥{{lunchSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithLunch)}}% to ¥{{preTaxTotalWithLunch | currency}}</p>
             </div>
           </div>
 
-          <div class="text-center border border-grey-light rounded mb-4 shadow bg-white lg:w-1/3 ml-2 leading-normal">
-            <div class="_header border-t-4 border-blue-dark rounded-t"></div>
+          <div class="text-center border border-grey-light rounded mb-4 lg:mb-0 shadow bg-white lg:w-1/3 lg:ml-2 leading-normal">
+            <div class="_header rounded-t"></div>
             <div class="p-4">
-              <h3 class="font-semibold text-2xl mb-2 leading-tight">Skip a night out</h3>
+              <h3 class="font-black text-lg mb-2 leading-tight">Skip a night out</h3>
               <p>and have ¥{{nightOutSavingPerMonth | currency}} more per month to invest. Your total investment grows by {{Math.round(preTaxGrowthWithNightOut)}}% to ¥{{preTaxTotalWithNightOut | currency}}</p>
             </div>
           </div>

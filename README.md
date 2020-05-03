@@ -1,5 +1,7 @@
 # retirejapan
 
+AA: This project was created with the vue cli.
+
 ## Project setup
 ```
 yarn install
