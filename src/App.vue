@@ -83,7 +83,7 @@
             </div>
           </div>
 
-          <div class="text-center border border-grey-light rounded mb-4 lg:mb-0 shadow bg-white lg:w-1/3 lg:ml-2 leading-normal">
+          <div class="text-center border border-grey-light rounded lg:mb-0 shadow bg-white lg:w-1/3 lg:ml-2 leading-normal">
             <div class="_header rounded-t"></div>
             <div class="p-4">
               <h3 class="font-black text-lg mb-2 leading-tight">Skip a night out</h3>
