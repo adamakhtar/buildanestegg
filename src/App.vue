@@ -56,7 +56,7 @@
           <div class="alert p-4 mb-4 mx-4 rounded-lg flex flex-col items-center lg:flex-row lg:items-center">
               <i class="fas fa-piggy-bank text-3xl text-blue-darkest opacity-25 mr-4 mb-3"></i>
               <p class="max-w-lg leading-normal">
-                Compound interest creates a snowball like effect with your investments; the gains you make in one year from interest are then subject to interest in the following year. The biggest multiplier is time. It's better to start earlier with smaller monthly contributions than to start later with bigger ones.
+                Compound interest creates a snowball effect with your investments; the gains you make in one year from interest are then subject to interest in the following year. The biggest multiplier is time. It's better to start earlier with smaller monthly contributions than to start later with bigger ones.
               </p>
           </div>
           <div class="p-4">
