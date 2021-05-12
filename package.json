@@ -10,7 +10,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "chart.js": "^2.7.3",
+    "chart.js": "^2.9.4",
     "financejs": "^4.1.0",
     "lodash": "^4.17.11",
     "tailwindcss": "^0.6.6",
